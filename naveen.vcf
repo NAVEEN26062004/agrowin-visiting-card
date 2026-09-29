@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Kumar;Naveen;;;
+FN:Naveen Kumar
+ORG:AGROWIN Technology Pvt Ltd
+TITLE:Founder & Technical Lead
+TEL;TYPE=CELL,VOICE:+917598557533
+EMAIL;TYPE=WORK,INTERNET:agrowintechnology@gmail.com
+URL:https://agrowin.in
+ADR;TYPE=WORK:;;;Erode;Tamil Nadu;;India
+END:VCARD
