@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGROWIN Technology - Contact Card</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #151e2e;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --accent: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .header h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
+    }
+
+    .header p {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      margin-top: 6px;
+    }
+
+    .profiles {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .card:active {
+      transform: scale(0.98);
+      border-color: var(--accent);
+      background: #1a2538;
+    }
+
+    .avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      flex-shrink: 0;
+      background-color: #243046;
+    }
+
+    .info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .info .role {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+
+    .info .desc {
+      font-size: 0.75rem;
+      color: var(--text-sub);
+      line-height: 1.25;
+    }
+
+    .action-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .action-badge svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--accent);
+    }
+
+    .footer {
+      margin-top: 32px;
+      font-size: 0.75rem;
+      color: var(--text-sub);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>AGROWIN Technology</h1>
+      <p>Tap a founder card to save contact instantly</p>
+    </div>
+
+    <div class="profiles">
+      <!-- Founder 1 -->
+      <div class="card" onclick="saveContact('founder1')">
+        <img src="naveen.jpg" alt="Naveen Kumar" class="avatar" onerror="this.src='https://via.placeholder.com/68?text=NK'">
+        <div class="info">
+          <h2>Naveen Kumar</h2>
+          <span class="role">Founder & Tech Lead</span>
+          <span class="desc">Embedded IoT, Automation & R&D</span>
+        </div>
+        <div class="action-badge">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          <span>Save</span>
+        </div>
+      </div>
+
+      <!-- Co-Founder -->
+      <div class="card" onclick="saveContact('founder2')">
+        <img src="cofounder.jpg" alt="Co-Founder" class="avatar" onerror="this.src='https://via.placeholder.com/68?text=CF'">
+        <div class="info">
+          <h2>Co-Founder Name</h2>
+          <span class="role">Co-Founder</span>
+          <span class="desc">Business & Field Deployment</span>
+        </div>
+        <div class="action-badge">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          <span>Save</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      agrowin.in &bull; Erode, Tamil Nadu
+    </div>
+  </div>
+
+  <script>
+    const directory = {
+      founder1: {
+        firstName: "Naveen",
+        lastName: "Kumar",
+        org: "AGROWIN Technology Pvt Ltd",
+        title: "Founder & Technical Lead",
+        phone: "+917598557533",
+        email: "agrowintechnology@gmail.com",
+        url: "https://agrowin.in",
+        city: "Erode",
+        state: "Tamil Nadu",
+        country: "India"
+      },
+      founder2: {
+        firstName: "Co-Founder",
+        lastName: "Name",
+        org: "AGROWIN Technology Pvt Ltd",
+        title: "Co-Founder",
+        phone: "+91XXXXXXXXXX",
+        email: "contact@agrowintechnology.com",
+        url: "https://agrowin.in",
+        city: "Erode",
+        state: "Tamil Nadu",
+        country: "India"
+      }
+    };
+
+    function saveContact(key) {
+      const p = directory[key];
+      if (!p) return;
+
+      const vcard = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        `N:${p.lastName};${p.firstName};;;`,
+        `FN:${p.firstName} ${p.lastName}`,
+        `ORG:${p.org}`,
+        `TITLE:${p.title}`,
+        `TEL;TYPE=CELL,VOICE:${p.phone}`,
+        `EMAIL;TYPE=WORK,INTERNET:${p.email}`,
+        `URL:${p.url}`,
+        `ADR;TYPE=WORK:;;;${p.city};${p.state};;${p.country}`,
+        "END:VCARD"
+      ].join("\r\n");
+
+      const blob = new Blob([vcard], { type: "text/x-vcard;charset=utf-8" });
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = blobUrl;
+      link.setAttribute("download", `${p.firstName}_${p.lastName}.vcf`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
+    }
+  </script>
+</body>
+</html>
