@@ -119,11 +119,9 @@
       padding: 12px;
       background: var(--accent);
       color: #042f2e;
-      border: none;
       border-radius: 10px;
       font-size: 0.88rem;
       font-weight: 700;
-      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -186,14 +184,14 @@
           </div>
         </div>
 
-        <button class="btn-save" onclick="saveContact('founder1')">
+        <a href="naveen.vcf" class="btn-save">
           <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
           Save to Contacts
-        </button>
+        </a>
 
         <div class="quick-actions">
-          <a href="tel:+917598557533" class="btn-action">?? Call</a>
-          <a href="https://wa.me/917598557533" class="btn-action">?? WhatsApp</a>
+          <a href="tel:+917598557533" class="btn-action">📞 Call</a>
+          <a href="https://wa.me/917598557533" class="btn-action">💬 WhatsApp</a>
         </div>
       </div>
 
@@ -208,14 +206,14 @@
           </div>
         </div>
 
-        <button class="btn-save" onclick="saveContact('founder2')">
+        <a href="cofounder.vcf" class="btn-save">
           <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
           Save to Contacts
-        </button>
+        </a>
 
         <div class="quick-actions">
-          <a href="tel:+91XXXXXXXXXX" class="btn-action">?? Call</a>
-          <a href="https://wa.me/91XXXXXXXXXX" class="btn-action">?? WhatsApp</a>
+          <a href="tel:+91XXXXXXXXXX" class="btn-action">📞 Call</a>
+          <a href="https://wa.me/91XXXXXXXXXX" class="btn-action">💬 WhatsApp</a>
         </div>
       </div>
     </div>
@@ -225,51 +223,5 @@
     </div>
   </div>
 
-  <script>
-    const data = {
-      founder1: {
-        name: "Naveen Kumar",
-        phone: "+917598557533",
-        email: "agrowintechnology@gmail.com",
-        company: "AGROWIN Technology Pvt Ltd",
-        title: "Founder & Tech Lead",
-        file: "naveen.vcf"
-      },
-      founder2: {
-        name: "Co-Founder Name",
-        phone: "+91XXXXXXXXXX",
-        email: "contact@agrowintechnology.com",
-        company: "AGROWIN Technology Pvt Ltd",
-        title: "Co-Founder",
-        file: "cofounder.vcf"
-      }
-    };
-
-    function saveContact(key) {
-      const p = data[key];
-      if (!p) return;
-
-      const isAndroid = /Android/i.test(navigator.userAgent);
-
-      if (isAndroid) {
-        // Direct Android Intent to launch native Contacts app with pre-filled fields
-        const intentUrl = 
-          "intent:#Intent;" +
-          "action=android.intent.action.INSERT;" +
-          "type=vnd.android.cursor.dir/contact;" +
-          `S.name=${encodeURIComponent(p.name)};` +
-          `S.phone=${encodeURIComponent(p.phone)};` +
-          `S.email=${encodeURIComponent(p.email)};` +
-          `S.company=${encodeURIComponent(p.company)};` +
-          `S.job_title=${encodeURIComponent(p.title)};` +
-          "end";
-
-        window.location.href = intentUrl;
-      } else {
-        // iOS Safari automatically prompts to save contacts from .vcf
-        window.location.href = p.file;
-      }
-    }
-  </script>
 </body>
 </html>
