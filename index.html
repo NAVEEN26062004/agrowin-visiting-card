@@ -127,6 +127,8 @@
       justify-content: center;
       gap: 8px;
       text-decoration: none;
+      border: none;
+      cursor: pointer;
     }
 
     .btn-save:active {
@@ -154,6 +156,30 @@
       align-items: center;
       justify-content: center;
       gap: 4px;
+    }
+
+    /* Floating Banner Prompt */
+    #prompt-box {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e293b;
+      border: 1px solid var(--accent);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      font-size: 0.82rem;
+      z-index: 99;
+      text-align: center;
+      animation: bounce 0.6s ease;
+    }
+
+    @keyframes bounce {
+      0% { transform: translate(-50%, 20px); opacity: 0; }
+      100% { transform: translate(-50%, 0); opacity: 1; }
     }
 
     .footer {
@@ -184,10 +210,10 @@
           </div>
         </div>
 
-        <a href="intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/contact;S.name=Naveen%20Kumar;S.phone=%2B917598557533;S.email=agrowintechnology%40gmail.com;S.company=AGROWIN%20Technology%20Pvt%20Ltd;S.job_title=Founder%20%26%20Tech%20Lead;S.postal=Erode%2C%20Tamil%20Nadu;end" class="btn-save">
+        <button onclick="downloadContact('founder1')" class="btn-save">
           <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
           Save to Contacts
-        </a>
+        </button>
 
         <div class="quick-actions">
           <a href="tel:+917598557533" class="btn-action">📞 Call</a>
@@ -206,10 +232,10 @@
           </div>
         </div>
 
-        <a href="intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/contact;S.name=Co-Founder%20Name;S.phone=%2B91XXXXXXXXXX;S.email=contact%40agrowintechnology.com;S.company=AGROWIN%20Technology%20Pvt%20Ltd;S.job_title=Co-Founder;S.postal=Erode%2C%20Tamil%20Nadu;end" class="btn-save">
+        <button onclick="downloadContact('founder2')" class="btn-save">
           <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
           Save to Contacts
-        </a>
+        </button>
 
         <div class="quick-actions">
           <a href="tel:+91XXXXXXXXXX" class="btn-action">📞 Call</a>
@@ -223,5 +249,70 @@
     </div>
   </div>
 
+  <div id="prompt-box">
+    👇 Tap <b>"Open"</b> on the popup below to save
+  </div>
+
+  <script>
+    const contacts = {
+      founder1: {
+        fn: "Naveen Kumar",
+        lastName: "Kumar",
+        firstName: "Naveen",
+        phone: "+917598557533",
+        email: "agrowintechnology@gmail.com",
+        title: "Founder & Tech Lead",
+        org: "AGROWIN Technology Pvt Ltd",
+        city: "Erode",
+        state: "Tamil Nadu"
+      },
+      founder2: {
+        fn: "Co-Founder Name",
+        lastName: "Name",
+        firstName: "Co-Founder",
+        phone: "+91XXXXXXXXXX",
+        email: "contact@agrowintechnology.com",
+        title: "Co-Founder",
+        org: "AGROWIN Technology Pvt Ltd",
+        city: "Erode",
+        state: "Tamil Nadu"
+      }
+    };
+
+    function downloadContact(key) {
+      const c = contacts[key];
+      if (!c) return;
+
+      const vcard = 
+`BEGIN:VCARD
+VERSION:3.0
+N:${c.lastName};${c.firstName};;;
+FN:${c.fn}
+ORG:${c.org}
+TITLE:${c.title}
+TEL;TYPE=CELL,VOICE:${c.phone}
+EMAIL;TYPE=WORK,INTERNET:${c.email}
+ADR;TYPE=WORK:;;;${c.city};${c.state};;India
+URL:https://agrowin.in
+END:VCARD`;
+
+      const blob = new Blob([vcard], { type: "text/x-vcard;charset=utf-8" });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `${c.firstName}_${c.lastName}.vcf`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      // Show instruction banner guiding the user to tap "Open"
+      const prompt = document.getElementById("prompt-box");
+      prompt.style.display = "block";
+      setTimeout(() => {
+        prompt.style.display = "none";
+      }, 5000);
+    }
+  </script>
 </body>
 </html>
